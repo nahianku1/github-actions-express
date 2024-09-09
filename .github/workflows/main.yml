@@ -12,9 +12,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Load Cache
+        id: load
         uses: ./.github/actions/cache-deps
       - name: Test code
         run: npm run test
+      - name: Print Cache
+        run: echo "${{steps.load.outputs.cached-output}}"
 
   build:
     runs-on: ubuntu-latest

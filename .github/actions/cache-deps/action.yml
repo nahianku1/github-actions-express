@@ -4,9 +4,14 @@ description: This is a cache dependency Workflow
 
 inputs:
   caching:
-    description: This should be a cache dependency
-    default: 'true'
+    description: This should be a cache dependency inputs
+    default: "true"
     required: false
+outputs:
+  cached-output:
+    description: This should be a cache dependency outputs
+    value: ${{ steps.install.outputs.cache}}
+
 runs:
   using: "composite"
   steps:
@@ -18,6 +23,9 @@ runs:
         path: node_modules
         key: cache-dep-${{ hashFiles('**/package-lock.json')}}
     - name: Install dependencies
+      id: install
       if: steps.cache.outputs.cache-hit != 'true' || inputs.caching != 'true'
-      run: npm ci
+      run: |
+        npm ci
+        echo "cache=${{inputs.caching}}" >> $GITHUB_OUTPUT
       shell: bash
