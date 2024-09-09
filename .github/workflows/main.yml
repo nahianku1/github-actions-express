@@ -26,10 +26,17 @@ jobs:
         run: npm ci
       - name: Build artifacts
         run: npm run build
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist-file
+          path: dist
 
   deploy:
     needs: build
     uses: ./.github/workflows/reusable.yml
+    with:
+      artifact: "dist-file"
 
   report:
     runs-on: ubuntu-latest
@@ -38,7 +45,7 @@ jobs:
     steps:
       - name: Get Code
         uses: actions/checkout@v3
-      - name: Upload artifacts
+      - name: Upload report
         uses: actions/upload-artifact@v3
         with:
           name: report-file
