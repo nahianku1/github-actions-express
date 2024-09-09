@@ -8,15 +8,24 @@ on:
         required: true
         default: dist
         type: string
+    outputs:
+      result:
+        description: this is name of outputs
+        value: ${{jobs.deploy.result}}
 
 jobs:
   deploy:
+    outputs:
+      result: ${{ steps.set-output.outputs.result}}
     runs-on: ubuntu-latest
     steps:
       - name: Downloaded artifacts
         uses: actions/download-artifact@v3
         with:
           name: ${{inputs.artifact}}
-          
+
       - name: Deploy code
         run: echo "Deploying..."
+      - name: Output result
+        id: set-output
+        run: echo "::set-output name=result::success"
