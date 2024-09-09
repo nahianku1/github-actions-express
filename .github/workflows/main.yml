@@ -7,31 +7,13 @@ on:
 
 jobs:
   deploy:
-    runs-on: ${{matrix.os}}
-    continue-on-error: true
-    strategy:
-      matrix:
-        node: [12, 14, 16]
-        os: [ubuntu-latest, windows-latest]
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{matrix.node}}
-      - name: Cache Dependencies
-        id: cache
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: dep-cache-${{hashFiles('**/package-lock.json')}}
       - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: Test code
-        id: test
-        continue-on-error: true
         run: npm run test
       - name: Build code
         run: npm run build
