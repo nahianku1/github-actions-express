@@ -11,7 +11,7 @@ on:
     outputs:
       result:
         description: this is name of outputs
-        value: ${{jobs.deploy.result}}
+        value: ${{jobs.deploy.outputs.result}}
 
 jobs:
   deploy:
