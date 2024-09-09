@@ -5,13 +5,13 @@ description: This is a cache dependency Workflow
 inputs:
   caching:
     description: This should be a cache dependency
-    default: "true"
+    default: 'true'
     required: false
 runs:
   using: "composite"
   steps:
     - name: Cache dependencies
-      if: inputs.caching == "true"
+      if: inputs.caching == 'true'
       uses: actions/cache@v3
       id: cache
       with:
