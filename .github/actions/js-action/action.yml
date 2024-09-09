@@ -1,0 +1,5 @@
+name: JS Workflow
+description: This is a custom javascript actions
+runs:
+  using: "node16"
+  main: "main.js"
