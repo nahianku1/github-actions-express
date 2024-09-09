@@ -7,7 +7,7 @@ describe('User API Endpoints', () => {
   it('should fetch all users', async () => {
     const response = await request(app).get('/users');
     expect(response.status).toBe(200);
-    expect(response.body.lengt).toBe(2);
+    expect(response.body.length).toBe(2);
   });
 
   it('should fetch a user by ID', async () => {
