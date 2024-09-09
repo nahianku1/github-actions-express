@@ -30,7 +30,7 @@ jobs:
         run: | 
          pwd
          ls -la
-         chmod -r 777 /__w
+         chmod -R 777 /__w
          npm run build
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
