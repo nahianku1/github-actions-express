@@ -1,9 +1,6 @@
 name: Reusable Wrokflow
 
-on:
-  push:
-    branches:
-      - main
+on: workflow_call
 
 jobs:
   deploy:
