@@ -28,9 +28,12 @@ jobs:
       - name: Get Code
         uses: actions/checkout@v3
       - name: Load Cache
+        id: load
         uses: ./.github/actions/cache-deps
         with:
-          caching: 'false'
+          caching: "false"
+      - name: Print Cache
+        run: echo "${{steps.load.outputs.cached-output}}"
       - name: Install dependencies
         run: npm ci
       - name: Build artifacts
